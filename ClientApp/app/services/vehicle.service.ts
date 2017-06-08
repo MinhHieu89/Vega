@@ -1,6 +1,7 @@
 import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
+import { SaveVehicle } from "../models/vehicle";
 
 @Injectable()
 export class VehicleService {
@@ -12,6 +13,26 @@ export class VehicleService {
   }
 
   getFeatures() {
-    return this.http.get('api/features').map(res => res.json());
+    return this.http.get('/api/features').map(res => res.json());
+  }
+
+  createVehicle(vehicle: SaveVehicle) {
+    return this.http.post('/api/vehicles', vehicle).map(res => res.json());
+  }
+
+  updateVehicle(vehicle: SaveVehicle) {
+    return this.http.put('/api/vehicles/' + vehicle.id, vehicle).map(res => res.json());
+  }
+
+  deleteVehicle(id: number) {
+    return this.http.delete('/api/vehicles/' + id).map(res => res.json());
+  }
+
+  getVehicle(id: number) {
+    return this.http.get('/api/vehicles/' + id).map(res => res.json());
+  }
+
+  getVehicles(query) {
+    //TODO: Implement get vehicles according to the query.
   }
 }
