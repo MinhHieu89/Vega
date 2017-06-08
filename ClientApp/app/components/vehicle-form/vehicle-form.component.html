@@ -3,7 +3,7 @@
 
 <p>{{ vehicle | json }}</p>
 
-<form #form="ngForm" (ngSubmit)="submit()">
+<form #form="ngForm" (ngSubmit)="submit()" novalidate>
   <div class="form-group">
     <label for="make">Make</label>
     <select name="makeId" id="make" class="form-control" (change)="onMakeChange()" [(ngModel)]="vehicle.makeId" required #make="ngModel">
@@ -46,5 +46,5 @@
     <label for="contactEmail">Email</label>
     <input type="text" id="contactEmail" class="form-control" name="contactEmail" [(ngModel)]="vehicle.contact.email">
   </div>
-  <button type="submit" class="btn btn-primary" [disabled]="!form.valid">Save</button>
+  <button type="submit" class="btn btn-primary" >Save</button>
 </form>

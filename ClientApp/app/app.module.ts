@@ -1,3 +1,5 @@
+import { ErrorHandler } from '@angular/core';
+import { ToastyModule } from 'ng2-toasty';
 import { VehicleService } from './services/vehicle.service';
 import { VehicleFormComponent } from './components/vehicle-form/vehicle-form.component';
 import { FormsModule } from '@angular/forms';
@@ -9,6 +11,7 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { AppErrorHandler } from "./app.error-handler";
 
 @NgModule({
     bootstrap: [ AppComponent ],
@@ -21,6 +24,7 @@ import { CounterComponent } from './components/counter/counter.component';
         VehicleFormComponent
     ],
     imports: [
+        ToastyModule.forRoot(),
         FormsModule,
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         RouterModule.forRoot([
@@ -34,6 +38,7 @@ import { CounterComponent } from './components/counter/counter.component';
         ])
     ],
     providers: [
+        { provide: ErrorHandler, useClass: AppErrorHandler },
         VehicleService
     ]
 })
