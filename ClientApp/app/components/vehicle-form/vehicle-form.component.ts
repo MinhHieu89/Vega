@@ -59,7 +59,7 @@ export class VehicleFormComponent implements OnInit {
     });
   }
 
-  mapVehicle(v: Vehicle) {
+  private mapVehicle(v: Vehicle) {
     this.vehicle.makeId = v.make.id;
     this.vehicle.modelId = v.model.id;
     this.vehicle.contact = v.contact;
@@ -72,7 +72,7 @@ export class VehicleFormComponent implements OnInit {
     delete this.vehicle.modelId;
   }
 
-  populateModel() {
+  private populateModel() {
     let selectedMake = this.makes.find(m => m.id == this.vehicle.makeId);
     this.models = selectedMake ? selectedMake.models : [];
   }

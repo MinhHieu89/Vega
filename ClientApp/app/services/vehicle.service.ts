@@ -32,7 +32,19 @@ export class VehicleService {
     return this.http.get('/api/vehicles/' + id).map(res => res.json());
   }
 
-  getVehicles() {
-    return this.http.get('/api/vehicles').map(res => res.json());
+  getVehicles(filter) {
+    return this.http.get('/api/vehicles' + '?' + this.toQueryString(filter)).map(res => res.json());
+  }
+
+  private toQueryString(obj) {
+    let parts = [];
+
+    for (let property in obj) {
+      let value = obj[property];
+      if (value != null && value != undefined)
+        parts.push(encodeURIComponent(property) + '=' + encodeURIComponent(value));
+    }
+
+    return parts.join('&');
   }
 }

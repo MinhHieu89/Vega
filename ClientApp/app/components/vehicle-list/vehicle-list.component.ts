@@ -10,24 +10,29 @@ import { Component, OnInit } from '@angular/core';
 export class VehicleListComponent implements OnInit {
 
   vehicles: Vehicle[];
-  allVehicles: Vehicle[];
   makes: any[];
+  models: any[];
   filter: any = {};
 
   constructor(private vehicleService: VehicleService) { }
 
   ngOnInit() {
     this.vehicleService.getMakes().subscribe(makes => this.makes = makes);
-    this.vehicleService.getVehicles().subscribe(vehicles => this.vehicles = this.allVehicles = vehicles);
+    this.populateVehicles();
+  }
+
+  private populateVehicles() {
+    this.vehicleService.getVehicles(this.filter).subscribe(vehicles => this.vehicles = vehicles);
   }
 
   onFilterChange() {
-    var vehicles = this.allVehicles;
+    this.populateVehicles();
+  }
 
-    if (this.filter.makeId) {
-      vehicles = vehicles.filter(v => v.make.id == this.filter.makeId);
-    }
-    this.vehicles = vehicles;
+  onMakeChange() {
+    let selectedMake = this.makes.find(make => make.id == this.filter.makeId);
+    this.models = selectedMake ? selectedMake.models : [];
+    delete this.filter.modelId
   }
 
   resetFilter() {
