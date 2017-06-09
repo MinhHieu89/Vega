@@ -32,7 +32,7 @@ export class VehicleService {
     return this.http.get('/api/vehicles/' + id).map(res => res.json());
   }
 
-  getVehicles(query) {
-    //TODO: Implement get vehicles according to the query.
+  getVehicles() {
+    return this.http.get('/api/vehicles').map(res => res.json());
   }
 }

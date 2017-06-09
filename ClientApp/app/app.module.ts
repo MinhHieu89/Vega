@@ -12,26 +12,29 @@ import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
 import { AppErrorHandler } from "./app.error-handler";
+import { VehicleListComponent } from './components/vehicle-list/vehicle-list.component';
 
 @NgModule({
-    bootstrap: [ AppComponent ],
+    bootstrap: [AppComponent],
     declarations: [
         AppComponent,
         NavMenuComponent,
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        VehicleFormComponent
+        VehicleFormComponent,
+        VehicleListComponent
     ],
     imports: [
         ToastyModule.forRoot(),
         FormsModule,
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
         RouterModule.forRoot([
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
+            { path: '', redirectTo: 'vehicles', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'vehicles/create', component: VehicleFormComponent },
             { path: 'vehicles/:id', component: VehicleFormComponent },
+            { path: 'vehicles', component: VehicleListComponent },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }

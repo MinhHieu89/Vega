@@ -22,6 +22,11 @@
                         <span class='glyphicon glyphicon-plus'></span> Add Vehicle
                     </a>
                 </li>
+                <li [routerLinkActive]="['link-active']" [routerLinkActiveOptions]="{exact:true}">
+                    <a [routerLink]="['/vehicles']">
+                        <span class='glyphicon glyphicon-stats'></span> Vehicle List
+                    </a>
+                </li>
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/counter']">
                         <span class='glyphicon glyphicon-education'></span> Counter

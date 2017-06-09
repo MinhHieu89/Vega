@@ -33,8 +33,8 @@ export class VehicleFormComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private vehicleService: VehicleService) {
-      this.route.params.subscribe(p => this.vehicle.id = +p['id'] || 0);
-    }
+    this.route.params.subscribe(p => this.vehicle.id = +p['id'] || 0);
+  }
 
   ngOnInit() {
     var sources = [
@@ -55,11 +55,11 @@ export class VehicleFormComponent implements OnInit {
         this.populateModel();
       }
     }, err => {
-      this.router.navigate(['/home']);
+      this.router.navigate(['/vehicles']);
     });
   }
 
-  mapVehicle(v : Vehicle) {
+  mapVehicle(v: Vehicle) {
     this.vehicle.makeId = v.make.id;
     this.vehicle.modelId = v.model.id;
     this.vehicle.contact = v.contact;
@@ -89,11 +89,11 @@ export class VehicleFormComponent implements OnInit {
   submit() {
     if (this.vehicle.id) {
       this.vehicleService.updateVehicle(this.vehicle).subscribe(res => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/vehicles']);
       })
     } else {
       this.vehicleService.createVehicle(this.vehicle).subscribe(res => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/vehicles']);
       });
     }
   }

@@ -1,0 +1,23 @@
+<h1>Vehicle List</h1>
+<button class="btn btn-primary" [routerLink]="['/vehicles/create']">New Vehicle</button>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Make</th>
+            <th>Model</th>
+            <th>Contact Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let vehicle of vehicles">
+            <td>{{ vehicle.id }}</td>
+            <td>{{ vehicle.make.name }}</td>
+            <td>{{ vehicle.model.name }}</td>
+            <td>{{ vehicle.contact.name }}</td>
+            <td><a href="/vehicles/{{vehicle.id}}">View</a></td>
+        </tr>
+    </tbody>
+
+</table>
