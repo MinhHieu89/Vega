@@ -6,14 +6,14 @@
 <div class="well" (change)="onFilterChange()">
     <div class="form-group">
         <label for="make">Make</label>
-        <select name="makeId" id="make" class="form-control" [(ngModel)]="filter.makeId" (change)="onMakeChange()">
+        <select name="makeId" id="make" class="form-control" [(ngModel)]="query.makeId" (change)="onMakeChange()">
             <option value=""></option>
             <option *ngFor="let m of makes" value="{{ m.id }}">{{ m.name }}</option>
         </select>
     </div>
     <div class="form-group">
         <label for="model">Model</label>
-        <select name="modelId" id="model" class="form-control" [(ngModel)]="filter.modelId" (change)="onFilterChange()">
+        <select name="modelId" id="model" class="form-control" [(ngModel)]="query.modelId" (change)="onFilterChange()">
             <option value=""></option>
             <option *ngFor="let m of models" value="{{ m.id }}">{{ m.name }}</option>
         </select>
@@ -21,14 +21,18 @@
     <button class="btn btn-default" (click)="resetFilter()">Reset</button>
 </div>
 
-
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Make</th>
-            <th>Model</th>
-            <th>Contact Name</th>
+            <th *ngFor="let c of columns">
+                <div *ngIf="c.isSortable" (click)="sortBy(c.key)">
+                    {{ c.title }}
+                    <i *ngIf="query.sortBy === c.key" class="fa" [class.fa-sort-asc]="query.isSortAscending" [class.fa-sort-desc]="!query.isSortAscending"></i>
+                </div>
+                <div *ngIf="!c.isSortable">
+                    {{ c.title }}
+                </div>
+            </th>
             <th></th>
         </tr>
     </thead>
