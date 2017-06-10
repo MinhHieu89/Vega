@@ -20,7 +20,7 @@ namespace Vega.Mapping
             .ForMember(vr => vr.Make, opts => opts.MapFrom(v => v.Model.Make));
 
             // Mapping from api resources to domain models
-            CreateMap<FilterResource, Filter>();
+            CreateMap<VehicleQueryResource, VehicleQuery>();
             CreateMap<SaveVehicleResource, Vehicle>()
             .ForMember(v => v.Id, opts => opts.Ignore())
             .ForMember(v => v.ContactName, opts => opts.MapFrom(vr => vr.Contact.Name))
