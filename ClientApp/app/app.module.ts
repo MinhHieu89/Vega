@@ -1,3 +1,4 @@
+import { PaginationComponent } from './components/shared/pagination.component';
 import { ErrorHandler } from '@angular/core';
 import { ToastyModule } from 'ng2-toasty';
 import { VehicleService } from './services/vehicle.service';
@@ -23,7 +24,8 @@ import { VehicleListComponent } from './components/vehicle-list/vehicle-list.com
         FetchDataComponent,
         HomeComponent,
         VehicleFormComponent,
-        VehicleListComponent
+        VehicleListComponent,
+        PaginationComponent
     ],
     imports: [
         ToastyModule.forRoot(),
