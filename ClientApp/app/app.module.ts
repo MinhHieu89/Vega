@@ -1,3 +1,4 @@
+import { PhotoService } from './services/photo.service';
 import { PaginationComponent } from './components/shared/pagination.component';
 import { ErrorHandler } from '@angular/core';
 import { ToastyModule } from 'ng2-toasty';
@@ -47,7 +48,8 @@ import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle.com
     ],
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },
-        VehicleService
+        VehicleService,
+        PhotoService
     ]
 })
 export class AppModule {
