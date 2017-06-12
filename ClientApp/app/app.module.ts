@@ -16,6 +16,8 @@ import { CounterComponent } from './components/counter/counter.component';
 import { AppErrorHandler } from "./app.error-handler";
 import { VehicleListComponent } from './components/vehicle-list/vehicle-list.component';
 import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle.component';
+import { BrowserXhr } from "@angular/http";
+import { BrowserXhrWithProgress, ProgressService } from "./services/progress.service";
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -48,8 +50,10 @@ import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle.com
     ],
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },
+        { provide: BrowserXhr, useClass: BrowserXhrWithProgress },
         VehicleService,
-        PhotoService
+        PhotoService,
+        ProgressService
     ]
 })
 export class AppModule {
