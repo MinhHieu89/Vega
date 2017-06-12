@@ -1,3 +1,4 @@
+import { AuthService } from './services/auth.service';
 import { PhotoService } from './services/photo.service';
 import { PaginationComponent } from './components/shared/pagination.component';
 import { ErrorHandler } from '@angular/core';
@@ -51,6 +52,7 @@ import { BrowserXhrWithProgress, ProgressService } from "./services/progress.ser
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },
         { provide: BrowserXhr, useClass: BrowserXhrWithProgress },
+        AuthService,
         VehicleService,
         PhotoService,
         ProgressService
