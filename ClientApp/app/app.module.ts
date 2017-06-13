@@ -22,6 +22,7 @@ import { BrowserXhr } from "@angular/http";
 import { BrowserXhrWithProgress, ProgressService } from "./services/progress.service";
 import { AuthGuard } from "./services/auth-gaurd.service";
 import { AdminAuthGuard } from "./services/admin-auth-guard";
+import { AUTH_PROVIDERS } from "angular2-jwt";
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -57,6 +58,7 @@ import { AdminAuthGuard } from "./services/admin-auth-guard";
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },
         AuthService,
+        AUTH_PROVIDERS,
         AdminAuthGuard,
         AuthGuard,
         VehicleService,

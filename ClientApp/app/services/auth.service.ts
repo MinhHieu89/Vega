@@ -8,7 +8,7 @@ import * as auth0 from 'auth0-js';
 export class AuthService {
 
     profile: any;
-    private roles: string[] = [];    
+    private roles: string[] = [];
 
     auth0 = new auth0.WebAuth({
         clientID: '2WeVUr4ogSAG0dtT91uANZEHlaHXCMq8',
@@ -20,7 +20,7 @@ export class AuthService {
     });
 
 
-    constructor(public router: Router) { 
+    constructor(public router: Router) {
         // Get user info from local storage
         this.readUserInfoFromLocalStorage();
     }
@@ -28,7 +28,7 @@ export class AuthService {
     private readUserInfoFromLocalStorage() {
         this.profile = JSON.parse(localStorage.getItem('profile'));
 
-        let token = localStorage.getItem('access_token');
+        let token = localStorage.getItem('token');
         if (token) {
             let jwtHelper = new JwtHelper();
             let decodedToken = jwtHelper.decodeToken(token);
@@ -47,7 +47,7 @@ export class AuthService {
     public handleAuthentication(): void {
         this.auth0.parseHash((err, authResult) => {
             if (authResult && authResult.accessToken && authResult.idToken) {
-                
+
                 window.location.hash = '';
                 this.setSession(authResult);
                 this.router.navigate(['/home']);
@@ -56,7 +56,7 @@ export class AuthService {
                 this.auth0.client.userInfo(authResult.accessToken, (err, profile) => {
                     if (err)
                         throw err; // This error will be handled by app.error-handler.ts
-                    
+
                     localStorage.setItem('profile', JSON.stringify(profile));
                     this.readUserInfoFromLocalStorage();
                 });
@@ -70,14 +70,14 @@ export class AuthService {
     private setSession(authResult): void {
         // Set the time that the access token will expire at
         const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
-        localStorage.setItem('access_token', authResult.accessToken);
+        localStorage.setItem('token', authResult.accessToken);
         localStorage.setItem('id_token', authResult.idToken);
         localStorage.setItem('expires_at', expiresAt);
     }
 
     public logout(): void {
         // Remove tokens and expiry time from localStorage
-        localStorage.removeItem('access_token');
+        localStorage.removeItem('token');
         localStorage.removeItem('id_token');
         localStorage.removeItem('expires_at');
         localStorage.removeItem('profile');
