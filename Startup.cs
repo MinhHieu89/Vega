@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Vega.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Vega.Models;
+using Vega.Controllers;
 
 namespace Vega
 {
@@ -39,6 +40,11 @@ namespace Vega
 
             services.AddAutoMapper();
             services.AddDbContext<VegaDbContext>(opts => opts.UseSqlServer(Configuration.GetConnectionString("Default")));
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(Policies.RequireAdminRole, policy => policy.RequireClaim("https://vega.com/roles", "Admin"));
+            });
 
             // Add framework services.
             services.AddMvc();
