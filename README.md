@@ -1,2 +1,2 @@
 # Vega
-##Building SPA with .Net Core and Angular 2##
+### Building SPA with .Net Core and Angular 2
