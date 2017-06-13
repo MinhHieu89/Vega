@@ -56,13 +56,11 @@ import { AdminAuthGuard } from "./services/admin-auth-guard";
     ],
     providers: [
         { provide: ErrorHandler, useClass: AppErrorHandler },
-        { provide: BrowserXhr, useClass: BrowserXhrWithProgress },
         AuthService,
         AdminAuthGuard,
         AuthGuard,
         VehicleService,
-        PhotoService,
-        ProgressService
+        PhotoService
     ]
 })
 export class AppModule {

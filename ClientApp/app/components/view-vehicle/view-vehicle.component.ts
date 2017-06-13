@@ -1,3 +1,5 @@
+import { BrowserXhr } from '@angular/http';
+import { ProgressService, BrowserXhrWithProgress } from './../../services/progress.service';
 import { ToastyService } from 'ng2-toasty';
 import { NgZone } from '@angular/core';
 import { PhotoService } from './../../services/photo.service';
@@ -5,12 +7,15 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { VehicleService } from './../../services/vehicle.service';
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ProgressService } from "../../services/progress.service";
 
 @Component({
   selector: 'app-view-vehicle',
   templateUrl: './view-vehicle.component.html',
-  styleUrls: ['./view-vehicle.component.css']
+  styleUrls: ['./view-vehicle.component.css'],
+  providers: [
+    { provide: BrowserXhr, useClass: BrowserXhrWithProgress },
+    ProgressService
+  ]
 })
 export class ViewVehicleComponent implements OnInit {
 
