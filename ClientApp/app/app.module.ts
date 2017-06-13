@@ -1,3 +1,4 @@
+import { AdminComponent } from './components/admin/admin.component';
 import { AuthService } from './services/auth.service';
 import { PhotoService } from './services/photo.service';
 import { PaginationComponent } from './components/shared/pagination.component';
@@ -19,6 +20,8 @@ import { VehicleListComponent } from './components/vehicle-list/vehicle-list.com
 import { ViewVehicleComponent } from './components/view-vehicle/view-vehicle.component';
 import { BrowserXhr } from "@angular/http";
 import { BrowserXhrWithProgress, ProgressService } from "./services/progress.service";
+import { AuthGuard } from "./services/auth-gaurd.service";
+import { AdminAuthGuard } from "./services/admin-auth-guard";
 
 @NgModule({
     bootstrap: [AppComponent],
@@ -31,7 +34,8 @@ import { BrowserXhrWithProgress, ProgressService } from "./services/progress.ser
         VehicleFormComponent,
         VehicleListComponent,
         PaginationComponent,
-        ViewVehicleComponent
+        ViewVehicleComponent,
+        AdminComponent
     ],
     imports: [
         ToastyModule.forRoot(),
@@ -44,6 +48,7 @@ import { BrowserXhrWithProgress, ProgressService } from "./services/progress.ser
             { path: 'vehicles/edit/:id', component: VehicleFormComponent },
             { path: 'vehicles/:id', component: ViewVehicleComponent },
             { path: 'vehicles', component: VehicleListComponent },
+            { path: 'admin', component: AdminComponent, canActivate: [ AdminAuthGuard ] },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: '**', redirectTo: 'home' }
@@ -53,6 +58,8 @@ import { BrowserXhrWithProgress, ProgressService } from "./services/progress.ser
         { provide: ErrorHandler, useClass: AppErrorHandler },
         { provide: BrowserXhr, useClass: BrowserXhrWithProgress },
         AuthService,
+        AdminAuthGuard,
+        AuthGuard,
         VehicleService,
         PhotoService,
         ProgressService
